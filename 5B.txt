@@ -1,0 +1,46 @@
+﻿1.
+Select customer_name from depositor d,account a where
+ a.accno = d.accno and
+ a.branch_name = 'Rajajinagar' 
+ group by customer_name 
+ having count(*) >= 2;
+
+
+2.
+
+
+SELECT d.customer_name
+ FROM account a,branch b,depositor d
+ WHERE b.branch_name=a.branch_name AND
+ a.accno=d.accno AND
+ b.branch_city='Bangalore'
+ GROUP BY d.customer_name
+ HAVING COUNT(distinct b.branch_name)=(
+ SELECT COUNT(branch_name)
+ FROM branch
+WHERE branch_city='Bangalore');
+
+
+3.
+
+
+delete from account
+ where branch_name in ( select branch_name
+ from branch
+ where branch_city ='Delhi');
+
+
+4.
+
+
+SELECT distinct d.customer_name
+From depositor d, account a
+WHERE a.accno=d.accno and a.branch_name='Rajbhavan';
+
+
+5.
+
+
+SELECT distinct b.customer_name
+From loan l, borrower b
+WHERE l.loan_number=b.loan_number and l.branch_name='KSLayout';
